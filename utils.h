@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <iostream>
 
-using namespace std;
+using  std::cout , std::endl;
 
 namespace utils {
 
@@ -19,38 +19,32 @@ namespace utils {
         }
     }
 
+    //Utitlity engine for the random generation of fruits
     inline auto randomGenerator(auto min, auto max) {
         static thread_local std::mt19937 eng{ std::random_device{}() };
         auto distr = make_distr(min, max);
         return distr(eng);
     }
 
+    //Move the cursor to the top-left corner instead of clearing the console.
+    //The whole board is redrawn in place, which avoids flashing in the console.
     inline void ClearScreen()
     {
-        system("cls");
-        /*
-        HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-        COORD home = { 0, 0 };
-        SetConsoleCursorPosition(hOut, home);
-
-        CONSOLE_CURSOR_INFO info;
-        GetConsoleCursorInfo(hOut, &info);
-        info.bVisible = FALSE;
-        SetConsoleCursorInfo(hOut, &info);
-        */
+        HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+        COORD topLeft = { 0, 0 };
+        SetConsoleCursorPosition(console, topLeft);
     }
 
+
+    //Splash screen
     inline void Loading()
     {
-		cout  <<"Welcome to Snake Game!" << endl;
-        cout << endl;
-        cout << "Loading... ";
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 10; i++)
         {
-            cout << static_cast<char>(254);
+            cout << static_cast<char>(220);
             Sleep(200);
         }
-        Sleep(500);
+        Sleep(10);
     }
 
 } // namespace utils
