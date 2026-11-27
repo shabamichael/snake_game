@@ -35,6 +35,15 @@ namespace utils {
         SetConsoleCursorPosition(console, topLeft);
     }
 
+    inline void SetCursorVisibility(bool visible)
+    {
+        HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+        CONSOLE_CURSOR_INFO cursorInfo;
+        GetConsoleCursorInfo(console, &cursorInfo);
+        cursorInfo.bVisible = visible;
+        SetConsoleCursorInfo(console, &cursorInfo);
+    }
+
 
     //Splash screen
     inline void Loading()
