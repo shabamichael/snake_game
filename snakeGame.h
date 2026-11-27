@@ -17,10 +17,12 @@ namespace snakeGame
 	{
 	public:
 	    Game();
-		void Setup();//Initializing the Game
-		void Draw(std::string playerName); //Creating Game Board or Game rendering
-		void Input();
-		void Logic(); // Function for updating the game state
+		void Setup();						//Initializing the Game
+		void Draw(std::string playerName);	//Creating Game Board or Game rendering
+		void Input();						// Function to handle user UserInput
+		void Logic();						// Function for updating the game state
+		int setDifficuty();					// Function to set the game difficulty level
+
 
 		int getScore() const;
 		bool IsGameOver() const;
@@ -53,9 +55,6 @@ namespace snakeGame
 
 		// snakesDirection variable
 		snakeDirection dir;
-
-	
-
 
 	};
 }

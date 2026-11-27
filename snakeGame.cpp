@@ -18,7 +18,8 @@ Game::Game()
 void Game::Setup()
 {
 	gameOver = false;
-	snakeDirection dir = snakeDirection::STOP;
+	dir = snakeDirection::STOP;
+	snakeTailLen = 0;
 	//To start the game at  the center of the screen
 	xPosition = WIDTH/2;  //position when the game initializes , the mid position of the width
 	yPosition = HEIGHT/2; //position when the game initializes , the mid position of the height
@@ -86,11 +87,12 @@ bool Game::IsGameOver() const
 	return gameOver;
 }
 
-void Game::Input()
-{
-	if(_kbhit())
-		switch (_getch())
-		{
+// Function to handle user UserInput
+void Game::Input() {
+	// Checks if a key is pressed or not
+	if (_kbhit())
+	{
+		switch (_getch()) {
 		case 'a':
 			dir = snakeDirection::LEFT;
 			break;
@@ -109,6 +111,7 @@ void Game::Input()
 		default:
 			break;
 		}
+	}
 }
 
 //Updating the Game State after each move
@@ -160,4 +163,27 @@ void Game::Logic()
 		fruitX = utils::randomGenerator(0, WIDTH - 1);
 		fruitY = utils::randomGenerator(0, HEIGHT - 1);
 	}
+}
+
+int Game::setDifficuty() {
+	int dfc, choice;
+	cout << "\n\nSET DIFFICULTY\n1: Easy\n2: Medium\n3: hard "
+		"\n\nNOTE: if not chosen or pressed any other "
+		"key, the difficulty will be automatically set "
+		"to medium\nChoose difficulty level: ";
+	cin >> choice;
+	switch (choice) {
+	case '1':
+		dfc = 50;
+		break;
+	case '2':
+		dfc = 100;
+		break;
+	case '3':
+		dfc = 150;
+		break;
+	default:
+		dfc = 100;
+	}
+	return dfc;
 }
